@@ -2,10 +2,15 @@ import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 
 public class LiczbaRzymskaTest {
+	
+	@Rule
+	public ExpectedException expectedEx = ExpectedException.none();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -18,7 +23,7 @@ public class LiczbaRzymskaTest {
 	}
 
 	@Test
-	public void test() 
+	public void LiczbaRzymskatest() 
 	{
 		assertEquals("I", new LiczbaRzymska(1).toString());
 		assertEquals("II", new LiczbaRzymska(2).toString());
@@ -55,29 +60,47 @@ public class LiczbaRzymskaTest {
 		assertEquals("MDCCLIV", new LiczbaRzymska(1754).toString());
 		assertEquals("MDCCCXXXII", new LiczbaRzymska(1832).toString());
 		assertEquals("MCMXCIII", new LiczbaRzymska(1993).toString());
-		//assertEquals("MMLXXIV", new LiczbaRzymska(2074).toString());
-		//assertEquals("MMCLII", new LiczbaRzymska(2152).toString());
-//		assertEquals("MMCCXII", new LiczbaRzymska(2212).toString());
-//		assertEquals("MMCCCXLIII", new LiczbaRzymska(2343).toString());
-//		assertEquals("MMCDXCIX", new LiczbaRzymska(2499).toString());
-//		assertEquals("MMDLXXIV", new LiczbaRzymska(2574).toString());
-//		assertEquals("MMDCXLVI", new LiczbaRzymska(2646).toString());		
-//		assertEquals("MMDCCXXIII", new LiczbaRzymska(2723).toString());
-//		assertEquals("MMDCCCXCII", new LiczbaRzymska(2892).toString());
-//		assertEquals("MMCMLXXV", new LiczbaRzymska(2975).toString());
-//		assertEquals("MMMLI", new LiczbaRzymska(3051).toString());
-//		assertEquals("MMMCLXXXV", new LiczbaRzymska(3185).toString());
-//		assertEquals("MMMCCL", new LiczbaRzymska(3250).toString());
-//		assertEquals("MMMCCCXIII", new LiczbaRzymska(3313).toString());
-//		assertEquals("MMMCDVIII", new LiczbaRzymska(3408).toString());
-//		assertEquals("MMMDI", new LiczbaRzymska(3501).toString());
-//		assertEquals("MMMDCX", new LiczbaRzymska(3610).toString());
-//		assertEquals("MMMDCCXLIII", new LiczbaRzymska(3743).toString());	
-//		assertEquals("MMMDCCCXLIV", new LiczbaRzymska(3844).toString());
-//		assertEquals("MMMDCCCLXXXVIII", new LiczbaRzymska(3888).toString());
-//		assertEquals("MMMCMXL", new LiczbaRzymska(3940).toString());
-//		assertEquals("MMMCMXCIX", new LiczbaRzymska(3999).toString());
-		
-	}
+		assertEquals("MMLXXIV", new LiczbaRzymska(2074).toString());
+		assertEquals("MMCLII", new LiczbaRzymska(2152).toString());
+		assertEquals("MMCCXII", new LiczbaRzymska(2212).toString());
+		assertEquals("MMCCCXLIII", new LiczbaRzymska(2343).toString());
+		assertEquals("MMCDXCIX", new LiczbaRzymska(2499).toString());
+		assertEquals("MMDLXXIV", new LiczbaRzymska(2574).toString());
+		assertEquals("MMDCXLVI", new LiczbaRzymska(2646).toString());		
+		assertEquals("MMDCCXXIII", new LiczbaRzymska(2723).toString());
+		assertEquals("MMDCCCXCII", new LiczbaRzymska(2892).toString());
+		assertEquals("MMCMLXXV", new LiczbaRzymska(2975).toString());
+		assertEquals("MMMLI", new LiczbaRzymska(3051).toString());
+		assertEquals("MMMCLXXXV", new LiczbaRzymska(3185).toString());
+		assertEquals("MMMCCL", new LiczbaRzymska(3250).toString());
+		assertEquals("MMMCCCXIII", new LiczbaRzymska(3313).toString());
+		assertEquals("MMMCDVIII", new LiczbaRzymska(3408).toString());
+		assertEquals("MMMDI", new LiczbaRzymska(3501).toString());
+		assertEquals("MMMDCX", new LiczbaRzymska(3610).toString());
+		assertEquals("MMMDCCXLIII", new LiczbaRzymska(3743).toString());	
+		assertEquals("MMMDCCCXLIV", new LiczbaRzymska(3844).toString());
+		assertEquals("MMMDCCCLXXXVIII", new LiczbaRzymska(3888).toString());
+		assertEquals("MMMCMXL", new LiczbaRzymska(3940).toString());
+		assertEquals("MMMCMXCIX", new LiczbaRzymska(3999).toString());
 
+		//assertEquals(new Exception("Liczba ujemna"), new LiczbaRzymska(-1).toString());	
+	}
+	
+	//testowanie wyjatkowych sytuacji
+	@Test
+	public void LiczbaRzymskaWyjatkowtest() 
+	{	
+		expectedEx.expect(java.lang.ArithmeticException.class);
+		expectedEx.expectMessage("Liczba rowna zero");
+		new LiczbaRzymska(0).toString();
+		
+		expectedEx.expect(java.lang.ArithmeticException.class);
+		expectedEx.expectMessage("Liczba ujemna");
+		new LiczbaRzymska(-1).toString();
+		
+		expectedEx.expect(java.lang.ArithmeticException.class);
+		expectedEx.expectMessage("Zbyt duza liczba");
+		new LiczbaRzymska(4001).toString();
+	}
+	
 }
