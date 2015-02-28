@@ -82,8 +82,6 @@ public class LiczbaRzymskaTest {
 		assertEquals("MMMDCCCLXXXVIII", new LiczbaRzymska(3888).toString());
 		assertEquals("MMMCMXL", new LiczbaRzymska(3940).toString());
 		assertEquals("MMMCMXCIX", new LiczbaRzymska(3999).toString());
-
-		//assertEquals(new Exception("Liczba ujemna"), new LiczbaRzymska(-1).toString());	
 	}
 	
 	//testowanie wyjatkowych sytuacji

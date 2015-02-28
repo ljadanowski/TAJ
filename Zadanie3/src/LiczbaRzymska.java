@@ -1,16 +1,5 @@
 import java.util.Hashtable;
 
-/*
- * Zad. 3. Napisz klasê LiczbaRzymska, która bêdzie posiada³a jedno prywatne pole zawieraj¹ce liczbê 
- * (zainicjalizowane w konstruktorze) i metodê toString(), która bêdzie zwraca³a tê sam¹ liczbê zapisan¹ 
- * w rzymskim systemie zapisywania liczb. 
-Przed implementacj¹ metody toString() zastanów siê jak powinna zachowaæ siê ta klasa w ró¿nych przypadkach 
-np. gdy w konstruktorze podano liczbê ujemn¹. 
-Zaimplementuj klasê testuj¹c¹ i odpowiednie przypadki testowe. W tym momencie testy oczywiœcie zakoñcz¹ siê niepowodzeniem. 
-Zaimplementuj metodê toString() i uruchom ponownie testy. 
-
-http://www.diveintopython.net/unit_testing/romantest.html
- */
 public class LiczbaRzymska 
 {
 	private String str_liczba = "";
