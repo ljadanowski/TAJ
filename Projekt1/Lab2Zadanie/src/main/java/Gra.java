@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Random;
 
 
@@ -75,29 +77,42 @@ public class Gra implements Psikus
 	public Integer nieksztaltek(Integer liczba) 
 	{
 		String tekst = liczba.toString();
-		Hashtable<String, String> zamiana = new Hashtable<String, String>();
+		String nowy = "";
+		Hashtable<Character, Character> zamiana = new Hashtable<Character, Character>();
 		generator = new Random();
-		
-		int wygenerowana = generator.nextInt(tekst.length());
-		zamiana.put("3", "8");
-		zamiana.put("7", "1");
-		zamiana.put("6", "9");
-		String klucze[] = {"3", "7", "6"};
 
-		for(String i : klucze)
+		zamiana.put('3', '8');
+		zamiana.put('7', '1');
+		zamiana.put('6', '9');
+		char klucze[] = {'3', '7', '6'};
+		
+		if((liczba.toString().length() == 1) || (liczba.toString().charAt(0) == '-' && liczba.toString().length() == 2)) 
+			return liczba;
+		else 
 		{
-			if(tekst.charAt(wygenerowana) == i.charAt(0))
+			int wygenerowana = generator.nextInt(zamiana.size());
+			char wylosowana_litera = klucze[wygenerowana];
+			for(int i=0; i<tekst.length(); i++)
 			{
-				String nowy = tekst.replace(tekst.charAt(wygenerowana), zamiana.get(i).charAt(0));
-				return Integer.parseInt(nowy);
+				if(tekst.charAt(i) == wylosowana_litera)
+				{
+					nowy = tekst.replace(tekst.charAt(i), zamiana.get(wylosowana_litera));
+					if(nowy.charAt(0) == '-') 
+					{
+						nowy = nowy.substring(1);
+						return -1 * Integer.parseInt(nowy);
+					}
+					else return Integer.parseInt(nowy);
+				}	
 			}
 		}
-		return liczba;
+		
+		if(nowy.isEmpty()) return liczba;
+		else return  Integer.parseInt(nowy);
 	}
 	
 	public static void main(String[] args)
 	{
-		Gra gra = new Gra();
-		System.out.println(gra.nieksztaltek(3));
+		
 	}
 }
