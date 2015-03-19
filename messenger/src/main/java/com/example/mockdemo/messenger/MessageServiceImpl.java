@@ -20,7 +20,15 @@ public class MessageServiceImpl implements MessageService
 	@Override
 	public SendingStatus send(String server, String message) throws MalformedRecipientException 
 	{
-		// TODO Auto-generated method stub
+		/* Metoda u¿ywana do wysy³ania komunikatów do serwera.
+	     Wymagamy aby adres serwera by³ przynajmniej 4 znakowy a komunikat
+	     przynajmniej 3 znakowy, w przeciwnym wypadku metoda wyrzuca
+	     MalformedRecipientException.
+	     Zwraca statusy:
+	     SendingStatus.SENT w przypadku powodzenia operacji
+	     SendingStatus.SENDING_ERROR w przypadku b³êdu (przerwane po³¹czenie itp.
+	     niezale¿ne b³êdy)
+	     */
 		return null;
 	}
 
