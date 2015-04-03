@@ -62,10 +62,10 @@ public class MessageMock01Test {
 	@Test
 	public void connectionPoprawnytest() 
 	{
-		expect(mock.checkConnection("wp.pl")).andReturn(ConnectionStatus.SUCCESS).atLeastOnce();
-		expect(mock.checkConnection("inf.ug.edu.pl")).andReturn(ConnectionStatus.SUCCESS).atLeastOnce();
-		expect(mock.checkConnection("jan.kowalski.pl")).andReturn(ConnectionStatus.SUCCESS).atLeastOnce();
-		expect(mock.checkConnection("jan52.kowalski.pl")).andReturn(ConnectionStatus.SUCCESS).atLeastOnce();
+		expect(mock.checkConnection("wp.pl")).andReturn(ConnectionStatus.SUCCESS).anyTimes();
+		expect(mock.checkConnection("inf.ug.edu.pl")).andReturn(ConnectionStatus.SUCCESS).anyTimes();
+		expect(mock.checkConnection("jan.kowalski.pl")).andReturn(ConnectionStatus.SUCCESS).anyTimes();
+		expect(mock.checkConnection("jan52.kowalski.pl")).andReturn(ConnectionStatus.SUCCESS).anyTimes();
 		
 		replay(mock);
 		
@@ -82,8 +82,8 @@ public class MessageMock01Test {
 	{
 
 		try {
-			expect(mock.send("wp.pl", "abc")).andReturn(SendingStatus.SENT).atLeastOnce();
-			expect(mock.send("kowalski.wp.pl", "abcdef")).andReturn(SendingStatus.SENT).atLeastOnce();
+			expect(mock.send("wp.pl", "abc")).andReturn(SendingStatus.SENT).anyTimes();
+			expect(mock.send("kowalski.wp.pl", "abcdef")).andReturn(SendingStatus.SENT).anyTimes();
 		} catch (MalformedRecipientException e) {
 			e.printStackTrace();
 		}
