@@ -25,38 +25,47 @@ public class DynamicProxyServiceTest
 	
 	@Test
 	public void checkConnectiontest() 
-	{	
+	{
+		//adresy prawidlowe
+		assertEquals(0, myApp.testConnection("w.pl"));
+		assertEquals(0, myApp.testConnection("wp.pl"));
+		assertEquals(0, myApp.testConnection("inf.ug.edu.pl"));
+		assertEquals(0, myApp.testConnection("jan.kowalski.pl"));   
+		assertEquals(0, myApp.testConnection("jan52.kowalski.pl"));  
+		assertEquals(0, myApp.testConnection("jan.kowalski.pl")); 
+		
+		//adresy nieprawidlowe
+		assertEquals(1, myApp.testConnection(""));	
 		assertEquals(1, myApp.testConnection(".pl"));
 		assertEquals(1, myApp.testConnection("jan.kowalski.de"));		
 		assertEquals(1, myApp.testConnection("wp.ru"));
 		assertEquals(1, myApp.testConnection("jan.kowalski"));
 		assertEquals(1, myApp.testConnection("kowalski"));
-		assertEquals(1, myApp.testConnection("kowalski.")); 
-		
-		//Zakldam tez ze nie moze byc duzych liter w nazwie
-		
-		//na potrzeby funkcji send (adres serwera przynajmniej 4-znakowy)
-		assertEquals(1, myApp.testConnection("w.pl"));
-		
-		assertEquals(1, myApp.testConnection(""));				
+		assertEquals(1, myApp.testConnection("kowalski.")); 			
 	}
 	
 	@Test
 	public void sendMessagetest() 
 	{	
-//		assertEquals(2, myApp.sendMessage("", ""));
-//		//bledny komunikat
-//		assertEquals(2, myApp.sendMessage("kowalski.wp.pl", ""));
-//		assertEquals(2, myApp.sendMessage("kowalski.wp.pl", "ab"));
-//								
-//		//tak naprawde jezeli sie nie polaczy to nic nie wysle...
-//		assertEquals(2, myApp.sendMessage(".pl", "def"));
-//		assertEquals(2, myApp.sendMessage("jan.kowalski.de", "def"));
-//		assertEquals(2, myApp.sendMessage("wp.ru", "def"));
-//		assertEquals(2, myApp.sendMessage("jan.kowalski", "def"));
-//		assertEquals(2, myApp.sendMessage("kowalski.", "def")); 
-//		
-//		//na potrzeby funkcji send (adres serwera przynajmniej 4-znakowy)
+		//dane prawidlowe
+		//przypadek graniczny
+		assertEquals(0, myApp.sendMessage("w.pl", "abc"));
+		assertEquals(0, myApp.sendMessage("kowalski.wp.pl", "abcdef"));
+		
+		//dane nieprawidlowe
+		assertEquals(2, myApp.sendMessage("", ""));
+		//bledny komunikat
+		assertEquals(2, myApp.sendMessage("kowalski.wp.pl", ""));
+		assertEquals(2, myApp.sendMessage("kowalski.wp.pl", "ab"));
+								
+		//tak naprawde jezeli sie nie polaczy to nic nie wysle...
+		assertEquals(2, myApp.sendMessage(".pl", "def"));
+		assertEquals(2, myApp.sendMessage("jan.kowalski.de", "def"));
+		assertEquals(2, myApp.sendMessage("wp.ru", "def"));
+		assertEquals(2, myApp.sendMessage("jan.kowalski", "def"));
+		assertEquals(2, myApp.sendMessage("kowalski.", "def")); 
+		
+		//na potrzeby funkcji send (adres serwera przynajmniej 4-znakowy)
 //		assertEquals(2, myApp.sendMessage("w.pl", "def"));
 	}
 	

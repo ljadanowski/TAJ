@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.util.reflection.Whitebox;
-
 import com.example.mockdemo.messenger.ConnectionStatus;
 import com.example.mockdemo.messenger.MalformedRecipientException;
 import com.example.mockdemo.messenger.MessageService;
@@ -85,6 +83,7 @@ public class MessageMock01Test {
 			expect(mock.send("wp.pl", "abc")).andReturn(SendingStatus.SENT).anyTimes();
 			expect(mock.send("kowalski.wp.pl", "abcdef")).andReturn(SendingStatus.SENT).anyTimes();
 		} catch (MalformedRecipientException e) {
+			fail("To nie powinno sie zdazyc!");
 			e.printStackTrace();
 		}
 		
@@ -109,6 +108,7 @@ public class MessageMock01Test {
 			//na potrzeby funkcji send (adres serwera przynajmniej 4-znakowy)
 			expect(mock.send("w.pl", "def")).andThrow(new MalformedRecipientException()).anyTimes();
 		} catch (MalformedRecipientException e) {
+			fail("To nie powinno sie zdazyc!");
 			e.printStackTrace();
 		}
 		
