@@ -1,0 +1,1 @@
+Za³adowaæ plik w apatche-jMeter a natepnie rozwinac liste klikajac dwa razy na JDBC Users
