@@ -8,11 +8,11 @@ import org.jbehave.core.annotations.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 public class BMIsteps 
 {
 	private final Pages pages;
-	JavascriptExecutor executor;
 	
 	public BMIsteps(Pages pages) {
 		this.pages = pages;
@@ -24,12 +24,22 @@ public class BMIsteps
         pages.home().open();        
     }
 	
-	@When("user sets parameters mass 80 and height 190")
-	public void userSetParametersCalculator()
-	{        	       
-	   pages.home().findElement(By.name("waga")).sendKeys("80");
-	   pages.home().findElement(By.name("wzrost")).sendKeys("190");
-	   //pages.home().findElement(By.id("Oblicz BMI")).click();
+	@When("user sets parameters mass $a and height $b")
+	public void userSetParametersCalculator(String a, String b)
+	{
+		//wypelnienie pol waga i wzrost
+	   pages.home().findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[1]/div[2]/form/div[1]/input[1]")).sendKeys(a);
+	   pages.home().findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[1]/div[2]/form/div[1]/input[3]")).sendKeys(b);
+	   //klik na przyciksu Oblicz BMI
+	   pages.home().findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[1]/div[2]/form/div[2]/input")).click();
+	}
+	
+	@Then("I give $result")
+	public void counted(double result)
+	{
+		WebElement element = pages.home().findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[1]/div[2]/div/p[1]/span"));
+		double actual = Double.parseDouble(element.getText());
+		assertEquals(result, actual, 0);
 	}
 	
     @When("user opens contact link")
@@ -44,16 +54,15 @@ public class BMIsteps
        assertEquals("Kontakt z autorem BMI-online.PL", pages.home().getTitle());
     }	
     
-    @When("user opens rules link")
-    public void userClicksOnRegulaminLink()
-    {        
-        pages.regulamin().findElement(By.linkText("Regulamin")).click();
-    }
-    
-    @Then("rules page is shown")
-    public void regulaminPageIsShown()
+    @When("user not set parameters")
+    public void notSetParameters()
     {
-       assertEquals("Regulamin serwisu internetowego", pages.home().getTitle());
+    	pages.home().findElement(By.xpath("/html/body/div[2]/div[3]/div[2]/div[1]/div[2]/form/div[2]/input")).click();
     }
-    
-}
+    @Then("get warning")
+    public void getWarning()
+    {
+    	pages.home().manage().window();
+    }
+    //zobaczyc jak w c#, dodac jeszcze pare z wykorzystaniem getCurrentUrl itd.
+}	
