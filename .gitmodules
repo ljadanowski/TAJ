@@ -1,0 +1,3 @@
+[submodule "TAJ"]
+	path = TAJ
+	url = https://github.com/ljadanowski/TAJ.git
